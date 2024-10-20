@@ -20,9 +20,8 @@ A decentralized Lottery DApp built using Ethereum smart contracts and a web-base
 - [Node.js](https://nodejs.org/) and npm installed.
 - An Ethereum development environment like [Hardhat](https://hardhat.org/).
 
+
 ## Initial Setup
-
-
 1. Clone the Repository
 
    ```bash
