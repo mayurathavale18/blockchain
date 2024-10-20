@@ -22,26 +22,26 @@ A decentralized Lottery DApp built using Ethereum smart contracts and a web-base
 
 ## Initial Setup
 
-1. **Clone the Repository**
+1. Clone the Repository
    ```bash
    git clone https://github.com/your-username/lottery-dapp.git
    cd lottery-dapp
    ```
 
-2. **Install Dependencies**
+2. Install Dependencies
    Make sure you are in the project directory and install the necessary npm packages.
    ```bash
    npm install
    ```
 
-3. **Set Up Hardhat**
+3. Set Up Hardhat
    If you haven't already set up a Hardhat environment, create a basic Hardhat configuration.
    ```bash
    npx hardhat
    ```
    Follow the prompts to create a new Hardhat project.
 
-4. **Create and Configure the Smart Contract**
+4. Create and Configure the Smart Contract
 
    - Create a new file `contracts/Lottery.sol` with the following content:
 
