@@ -1,5 +1,6 @@
 ```markdown
 # Lottery DApp
+```
 
 A decentralized Lottery DApp built using Ethereum smart contracts and a web-based frontend. Users can participate in the lottery by sending Ether and have a chance to win the entire balance when the manager picks a winner.
 
