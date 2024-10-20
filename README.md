@@ -22,7 +22,9 @@ A decentralized Lottery DApp built using Ethereum smart contracts and a web-base
 
 ## Initial Setup
 
+
 1. Clone the Repository
+
    ```bash
    git clone https://github.com/your-username/lottery-dapp.git
    cd lottery-dapp
