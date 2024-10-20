@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lottery DApp</title>
+    <!-- Include ethers.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  </head>
+  <body>
+    <h1>Lottery DApp</h1>
+    <button onclick="enterLottery()">Enter Lottery</button>
+
+    <!-- <div>
+      <h2>Get Players</h2>
+      <button onclick="getPlayers()">Get Players</button>
+      <div id="playersList"></div>
+    </div> -->
+
+    <!-- Your custom script should come after ethers.js -->
+    <script>
+      async function initialize() {
+        const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Replace with your contract address
+
+        if (typeof window.ethereum !== "undefined") {
+          try {
+            // Request account access
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+
+            // Set up provider and signer
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            console.log(provider);
+            const signer = provider.getSigner();
+
+            // ABI of the Lottery contract
+            const lotteryABI = [
+              {
+                inputs: [],
+                stateMutability: "nonpayable",
+                type: "constructor",
+              },
+              {
+                inputs: [],
+                name: "getBalance",
+                outputs: [
+                  {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256",
+                  },
+                ],
+                stateMutability: "view",
+                type: "function",
+              },
+              {
+                inputs: [],
+                name: "manager",
+                outputs: [
+                  {
+                    internalType: "address",
+                    name: "",
+                    type: "address",
+                  },
+                ],
+                stateMutability: "view",
+                type: "function",
+              },
+              {
+                inputs: [],
+                name: "participate",
+                outputs: [],
+                stateMutability: "payable",
+                type: "function",
+              },
+              {
+                inputs: [],
+                name: "pickWinner",
+                outputs: [],
+                stateMutability: "nonpayable",
+                type: "function",
+              },
+              {
+                inputs: [
+                  {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256",
+                  },
+                ],
+                name: "players",
+                outputs: [
+                  {
+                    internalType: "address payable",
+                    name: "",
+                    type: "address",
+                  },
+                ],
+                stateMutability: "view",
+                type: "function",
+              },
+              {
+                inputs: [],
+                name: "winner",
+                outputs: [
+                  {
+                    internalType: "address payable",
+                    name: "",
+                    type: "address",
+                  },
+                ],
+                stateMutability: "view",
+                type: "function",
+              },
+              {
+                inputs: [],
+                name: "getNumberOfPlayers", // Add this line
+                outputs: [
+                  {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256",
+                  },
+                ],
+                stateMutability: "view",
+                type: "function",
+              },
+            ];
+
+            // Initialize contract
+            window.lotteryContract = new ethers.Contract(
+              contractAddress,
+              lotteryABI,
+              signer
+            );
+            console.log("Contract initialized successfully.");
+          } catch (error) {
+            console.error("Error initializing contract:", error);
+          }
+        } else {
+          alert(
+            "MetaMask is not installed. Please install it to use this application."
+          );
+        }
+      }
+
+      // Call the initialize function when the page loads
+      window.onload = () => {
+        initialize();
+      };
+
+      async function enterLottery() {
+        if (!window.lotteryContract) {
+          alert("Lottery contract is not initialized.");
+          return;
+        }
+        try {
+          const tx = await window.lotteryContract.participate({
+            value: ethers.utils.parseEther("0.01"),
+          });
+          await tx.wait();
+          alert("You have entered the lottery!");
+        } catch (error) {
+          console.error(error);
+          alert("Error entering the lottery. Check the console for details.");
+        }
+      }
+
+    //   async function getPlayers() {
+    //     if (!window.lotteryContract) {
+    //       alert("Lottery contract is not initialized.");
+    //       return;
+    //     }
+    //     try {
+    //       const playerCount = await window.lotteryContract.getNumberOfPlayers(); // Replace with actual method if exists
+    //       const players = [];
+    //       for (let i = 0; i < playerCount; i++) {
+    //         const player = await window.lotteryContract.players(i);
+    //         players.push(player);
+    //       }
+    //       document.getElementById(
+    //         "playersList"
+    //       ).innerText = `Players: ${players.join(", ")}`;
+    //     } catch (error) {
+    //       console.error(error);
+    //       alert("Error fetching players. Check the console for details.");
+    //     }
+    //   }
+    </script>
+  </body>
+</html>
